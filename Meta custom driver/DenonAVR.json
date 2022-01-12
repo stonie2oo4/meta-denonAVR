@@ -19,6 +19,7 @@
        "CURSOR RIGHT": {"label":"", "type":"static", "command":""},
        "CURSOR ENTER": {"label":"", "type":"static", "command":""},
        "MENU": {"label":"", "type":"static", "command":""},
+       "BACK": {"label":"", "type":"static", "command":""},
        "SELECT": {"label":"", "type":"static", "command":""},
        "PRESET UP": {"label":"", "type":"static", "command":""},
        "PRESET DOWN": {"label":"", "type":"static", "command":""},
