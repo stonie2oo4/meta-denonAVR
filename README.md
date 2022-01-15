@@ -2,8 +2,7 @@
 This package is still under development, but has been tested for a number of buttons on AVR-4500.
 
 # Contents
-This package consists of both a NEEO-MEA devicedriver.
-
+This package consists of both a NEEO-META devicedriver and NodeRED Flow.
 NodeRED files not longer needed.
 
 Zone2+3 not implemented at the moment.
