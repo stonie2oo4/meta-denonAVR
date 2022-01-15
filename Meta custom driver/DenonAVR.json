@@ -6,7 +6,7 @@
        "MyStatus":"",
        "IsMuted":true,
        "VolumePlayed":50,
-       "TelnetURI": "192.168.5.20",
+       "TelnetURI": "10.10.50.20",
        "TelnetPort":"23"
     },
     "labels":{
@@ -15,7 +15,7 @@
     "listeners":{
         "DenonStatus" : {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MV?"}, "pooltime":"3000", "poolduration":"", "queryresult" : "$.", 
           "evalwrite" : [
-          {"variable" : "VolumePlayed","value" : "DYNAMIK Math.round(Number(JSON.parse(\"$Result\")[0].volume)*100/98)"}
+          {"variable" : "VolumePlayed","value" : "DYNAMIK Math.round(Number(JSON.parse(\"$Result\")[0].volume)*100/100)"}
         ]}
     },
     "sliders":{
@@ -69,7 +69,7 @@
         "SUR:PURE DIRECT": {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MSPURE DIRECT"}, "queryresult":"$.response_code", "evalwrite":[{"variable":"MyStatus","value":"DYNAMIK ($Result==MSPURE DIRECT)?\"Surround Pure Direct set\":\"Command Failed\""}]},
         "SUR:STEREO": {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MSSTEREO"}, "queryresult":"$.response_code", "evalwrite":[{"variable":"MyStatus","value":"DYNAMIK ($Result==MSSTEREO)?\"Surround Stereo set\":\"Command Failed\""}]},
         "SUR:AUTO": {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MSAUTO"}, "queryresult":"$.response_code", "evalwrite":[{"variable":"MyStatus","value":"DYNAMIK ($Result==MSAUTO)?\"Surround Auto set\":\"Command Failed\""}]},
-        "__VOLUMESET": {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MV\" + (Math.round(0 + (98 - 0) * Number($VolumePlayed) / 100).toString())"}
+        "__VOLUMESET": {"label":"", "type":"telnet", "command":{"TelnetParms": {"host":"$TelnetURI","port":"$TelnetPort"},"message": "MV\" + (Math.round(0 + (100 - 0) * Number($VolumePlayed) / 100).toString())"}
     }
     }
 }
