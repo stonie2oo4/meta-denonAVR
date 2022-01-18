@@ -2,21 +2,32 @@
 This package is still under development, but has been tested for a number of buttons on AVR-4500.
 
 # Contents
-This package consists of both a NEEO-META devicedriver and NodeRED Flow.
-NodeRED files not longer needed.
-
-Zone2+3 not implemented at the moment.
+This package consists of a NEEO-META devicedriver. 
+Volume-Slider only implemented for Mai-Zone. If anyone needs more, let me know it.
+This driver published some data over mqtt.
+Published data are:
+MainPower 
+MainInput
+MainVolume
+MainMute
+Zone2Power
+Zone2Input
+Zone2Volume
+Zone2Mute
+Zone3Power
+Zone3Input
+Zone3Volume
+Zone3Mute
 
 # Connectiviy
- The "meta" on the Denon AVR3808 (maybe this applies to all Denon-devices) will only connect successfully to your Denon if no other connection is running. Multiple connections don't seem to be supported by the Denon firmware. 
+This driver uses the http protocol to control your DenonAVR. Denon Standard-Port till 2016 = 80. Newer Models 8080.
  
 # POWER ON and OFF
-This package can power on your Denon over Telnet if the Denon is keeping the network connection OPEN.
-The POWER OFF command will put the Denon in standby mode, so it can be woken up by Telnet-commands.  
+This package can power on your Denon over http if the Denon is keeping the network connection OPEN.
+The POWER OFF command will put the Denon in standby mode, so it can be woken up by http-commands.  
 
 # Autodiscovery 
 Not supported. IP must registerd at the start of the driver.
 
 # Issues
-Slider gives no response.
-Seeminly the listener doesn't work right in this driver.
+None this far.
