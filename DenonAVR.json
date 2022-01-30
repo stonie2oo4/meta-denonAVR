@@ -1,25 +1,70 @@
-{   "name":"DenonAVR",
-    "manufacturer":"Denon",
+{   "name":"Denon+MarantzAVR",
+    "manufacturer":"Denon+Marantz",
     "type":"AVRECEIVER",
-    "version":1,
-     "variables":{
-       "MainPower": "",
-       "MainInput": "",
-       "MainVolumeAVR": "",
-       "MainVolumePercent": "",
-       "MainMute":"",
-       "Zone2Power": "",
-       "Zone2Input": "",
-       "Zone2VolumeAVR": "",
-       "Zone2VolumePercent": "",
-       "Zone2Mute":"",
-       "Zone3Power": "",
-       "Zone3Input": "",
-       "Zone3VolumeAVR": "",
-       "Zone3VolumePercent": "",
-       "Zone3Mute":"",
-       "DenonURI": "10.10.50.20",
-       "DenonPort":"8080"
+    "version":3,
+    "compatible-meta":"1.0.4",
+    "persistedvariables":{
+        "MyDevice": "",
+        "IsRegistered": false,
+        "ToInitiate": true
+    },
+	"variables":{
+	    "DeviceURI": "",
+        "DevicePort":"",
+        "BrandCode":"",
+		"BrandList":"{\"bc0\":\"Denon\",\"bc1\":\"Marantz\"}"
+    },
+    "register":{
+        "registerheadertext": "Denon + Marantz AVR",
+        "registerdescription": "Please enter the IP address of your device. \n For example: 192.168.178.1 \n Port 8080 is used by default. Specify the port if different.",
+        "command": {"type": "static", "command": ".", "queryresult": "$.*"}        
+    },
+    "discover": {
+        "welcomeheadertext": "Denon + Marantz AVR",
+        "welcomedescription": "powered by meta v2 \n by JAC459 \n X \n Driver Development \n by stonie2oo4 & MarkusM",
+        "initcommandset":[{
+            "label":"", 
+			"type":"static",
+			"command":"$RegistrationCode",
+			"queryresult":"",
+			"evalwrite":[
+			    {"variable":"MyDevice",     "value":"DYNAMIK let device = {\"ip\":\"\", \"port\":\"\", \"model_name\":\"\", \"brand\":\"\"};  device.ip = \"$Result\".split(\":\")[0]; device.port = (\"$Result\".split(\":\")[1]!=undefined?\"$Result\".split(\":\")[1]:\"8080\"); JSON.stringify(device); "},
+			    {"variable":"DeviceURI",    "value":"DYNAMIK \"$Result\".split(\":\")[0] "},
+			    {"variable":"DevicePort",   "value":"DYNAMIK \"$Result\".split(\":\")[1]!=undefined?\"$Result\".split(\":\")[1]:\"8080\" "}
+			]},{
+			"type":"http-rest",
+			"command": "{\"verb\":\"get\",\"call\":\"http://$DeviceURI:$DevicePort/goform/Deviceinfo.xml\"}", 
+            "queryresult" : "$.Device_Info",
+            "evalwrite":[
+                {"variable":"BrandCode",    "value":"DYNAMIK \"bc\"+JSON.parse(\"$Result\").BrandCode[0]"},
+                {"variable":"MyDevice",     "value":"DYNAMIK let device = $MyDevice; device.model_name = JSON.parse(\"$Result\").ModelName[0]; let bl=$BrandList; let b=bl.$BrandCode; device.brand = (b!=undefined?b:\"Unknown Brand\"); JSON.stringify(device); "},
+                {"variable":"IsRegistered", "value":"DYNAMIK let device = $MyDevice; device.model_name != undefined;"}
+			],			
+			"evaldo":[{"test":"DYNAMIK let device = $MyDevice; device.model_name != undefined","then":"__PERSIST", "or":""}]}
+        ],
+        "command": {"type": "static", "command": "$MyDevice", "queryresult": ""}    
+    },
+    "template":{
+    "dynamicname":"DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").brand + \" \" + JSON.parse(\"$Result\").model_name DYNAMIK_INST_END",
+    "dynamicid":  "DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").ip DYNAMIK_INST_END",
+    "variables":{
+        "MainPower": "",
+        "MainInput": "",
+        "MainVolumeAVR": "",
+        "MainVolumePercent": "",
+        "MainMute":"",
+        "Zone2Power": "",
+        "Zone2Input": "",
+        "Zone2VolumeAVR": "",
+        "Zone2VolumePercent": "",
+        "Zone2Mute":"",
+        "Zone3Power": "",
+        "Zone3Input": "",
+        "Zone3VolumeAVR": "",
+        "Zone3VolumePercent": "",
+        "Zone3Mute":"",
+        "DenonURI": "DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").ip   DYNAMIK_INST_END",
+        "DenonPort":"DYNAMIK_INST_START DYNAMIK JSON.parse(\"$Result\").port DYNAMIK_INST_END"
     },
     "labels":{
         "MainPower" :     {"label":"MainPower",    "listen":"MainPower"},
@@ -85,12 +130,13 @@
         "CURSOR ENTER":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNENT"},
         "MENU":               {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNMEN ON"},
         "BACK":               {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNRTN"},
-        "INPUT CD":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SICD"},
-        "INPUT TUNER":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SITUNER"},
-        "INPUT DVD":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIDVD"},
         "INPUT BD":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIBD"},
-        "INPUT TV":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SITV"},
+        "INPUT GAME":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIGAME"},        
+        "INPUT CD":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SICD"},
+        "INPUT DVD":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIDVD"},
         "INPUT SAT/CBL":      {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SISAT/CBL"},
+        "INPUT TUNER":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SITUNER"},
+        "INPUT TV":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SITV"},
         "INPUT MPLAY":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIMPLAY"},
         "INPUT HDRADIO":      {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIHDRADIO"},
         "INPUT NET":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SINET"},
@@ -185,5 +231,6 @@
         "Z3 INPUT AUX6":      {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3AUX6"},
         "Z3 INPUT BT":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3BT"},
         "Z3 INPUT USB":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3USB"}
+    }
     }
 }
