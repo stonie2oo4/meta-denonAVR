@@ -1,7 +1,7 @@
-{   "name":"DenonAVR",
+{   "name":"DenonMarantzAVR",
     "manufacturer":"DenonMarantz",
     "type":"AVRECEIVER",
-    "version":3,
+    "version":4,
     "compatible-meta":"1.0.4",
     "persistedvariables":{
         "MyDevice": "",
@@ -15,12 +15,12 @@
 		"BrandList":"{\"bc0\":\"Denon\",\"bc1\":\"Marantz\"}"
     },
     "register":{
-        "registerheadertext": "DenonAVR",
+        "registerheadertext": "Denon Marantz AVR",
         "registerdescription": "Please enter the IP address of your device. \n For example: 192.168.178.1 \n Port 8080 is used by default. Specify the port if different.",
         "command": {"type": "static", "command": ".", "queryresult": "$.*"}        
     },
     "discover": {
-        "welcomeheadertext": "DenonAVR",
+        "welcomeheadertext": "Denon Marantz AVR",
         "welcomedescription": "powered by meta v2 \n by JAC459 \n X \n Driver Development \n by stonie2oo4 & MarkusM",
         "initcommandset":[{
             "label":"", 
