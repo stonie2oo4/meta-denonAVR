@@ -1,7 +1,7 @@
 {   "name":"DenonMarantzAVR",
     "manufacturer":"DenonMarantz",
     "type":"AVRECEIVER",
-    "version":5,
+    "version":6,
     "compatible-meta":"1.0.4",
     "persistedvariables":{
         "MyDevices": "[]",
@@ -167,7 +167,7 @@
         "SUR:AUTO":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSAUTO"},
         "__VOLUMESET":        {"label":"", "type":"http-get", "command":"DYNAMIK \"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MV\" + (\"0\" + Math.round(98*Number($MainVolumePercent)/100).toString() ).slice(-2)"},
 
-        "POWER Z2 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2ON"},      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
+        "POWER Z2 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2ON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
         "POWER Z2 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2OFF"},
         "VOLUME Z2 UP":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2UP"}, 
         "VOLUME Z2 DOWN":     {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2DOWN"}, 
@@ -201,7 +201,7 @@
         "INPUT Z2 BT":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2BT"},
         "INPUT Z2 USB":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2USB"},
 
-        "POWER Z3 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3ON"},      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
+        "POWER Z3 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3ON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
         "POWER Z3 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3OFF"},
         "VOLUME Z3 UP":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3UP"}, 
         "VOLUME Z3 DOWN":     {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3DOWN"}, 
