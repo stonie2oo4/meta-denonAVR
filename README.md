@@ -1,5 +1,5 @@
 ## DENON DRIVER FOR NEEO-META OVER HTTP
-This package is still under development, but has been tested for a number of buttons on AVR-4500.
+This package is still under development, but has been tested for a number of buttons on AVR-4400H.
 
 # Contents
 This package consists of a NEEO-META devicedriver. 
