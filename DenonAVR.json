@@ -1,7 +1,7 @@
 {   "name":"DenonMarantzAVR",
     "manufacturer":"DenonMarantz",
     "type":"AVRECEIVER",
-    "version":6,
+    "version":7,
     "compatible-meta":"1.0.4",
     "persistedvariables":{
         "MyDevices": "[]",
@@ -118,7 +118,7 @@
     },
     "buttons":{
         "POWER ON":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ZMON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
-        "POWER OFF":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ZMOFF",     "evaldo":[{"test":true, "then":"__CLEANUP",    "or":""}]},
+        "POWER OFF":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ZMOFF",     "evaldo":[{"test":"DYNAMIK \"$Zone2Power\"==\"OFF\" && \"$Zone3Power\"==\"OFF\" ", "then":"__CLEANUP", "or":""}]},
         "VOLUME UP":          {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MVUP"}, 
         "VOLUME DOWN":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MVDOWN"}, 
         "MUTE TOGGLE":        {"label":"", "type":"static",   "command":"",                                                                     "evaldo":[{"test":"DYNAMIK \"$MainMute\"==\"off\" ", "then":"__MUTEON", "or":"__MUTEOFF"}]},
@@ -168,7 +168,7 @@
         "__VOLUMESET":        {"label":"", "type":"http-get", "command":"DYNAMIK \"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MV\" + (\"0\" + Math.round(98*Number($MainVolumePercent)/100).toString() ).slice(-2)"},
 
         "POWER Z2 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2ON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
-        "POWER Z2 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2OFF"},
+        "POWER Z2 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2OFF",     "evaldo":[{"test":"DYNAMIK \"$MainPower\"==\"OFF\" && \"$Zone3Power\"==\"OFF\" ", "then":"__CLEANUP", "or":""}]},
         "VOLUME Z2 UP":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2UP"}, 
         "VOLUME Z2 DOWN":     {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2DOWN"}, 
         "MUTE Z2 TOGGLE":     {"label":"", "type":"static",   "command":"",                                                                     "evaldo":[{"test":"DYNAMIK \"$Zone2Mute\"==\"off\" ", "then":"__Z2MUTEON", "or":"__Z2MUTEOFF"}]},
@@ -202,7 +202,7 @@
         "INPUT Z2 USB":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2USB"},
 
         "POWER Z3 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3ON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
-        "POWER Z3 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3OFF"},
+        "POWER Z3 OFF":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3OFF",     "evaldo":[{"test":"DYNAMIK \"$MainPower\"==\"OFF\" && \"$Zone2Power\"==\"OFF\" ", "then":"__CLEANUP", "or":""}]},
         "VOLUME Z3 UP":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3UP"}, 
         "VOLUME Z3 DOWN":     {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3DOWN"}, 
         "MUTE Z3 TOGGLE":     {"label":"", "type":"static",   "command":"",                                                                     "evaldo":[{"test":"DYNAMIK \"$Zone3Mute\"==\"off\" ", "then":"__Z3MUTEON", "or":"__Z3MUTEOFF"}]},
