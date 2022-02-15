@@ -1,7 +1,7 @@
 {   "name":"DenonMarantzAVR",
     "manufacturer":"DenonMarantz",
     "type":"AVRECEIVER",
-    "version":7,
+    "version":9,
     "compatible-meta":"1.0.4",
     "persistedvariables":{
         "MyDevices": "[]",
@@ -39,7 +39,7 @@
             "evalwrite":[
                 {"variable":"BrandCode",    "value":"DYNAMIK \"bc\"+JSON.parse(\"$Result\").BrandCode[0]"},
                 {"variable":"NewDevice",    "value":"DYNAMIK let device = $NewDevice; device.model_name = JSON.parse(\"$Result\").ModelName[0]; let bl=$BrandList; let b=bl.$BrandCode; device.brand = (b!=undefined?b:\"Unknown Brand\"); JSON.stringify(device); "},
-				{"variable":"MyDevices",    "value":"DYNAMIK let device = $NewDevice; let mydevices = $MyDevices; ((mydevices.findIndex(i=>i.ip==device.ip)==-1) ? mydevices.push(device) : mydevices); JSON.stringify(mydevices); "}
+				{"variable":"MyDevices",    "value":"DYNAMIK let device = $NewDevice; let mydevices = $MyDevices; (device.model_name != undefined ? ((mydevices.findIndex(i=>i.ip==device.ip)==-1) ? mydevices.push(device) : mydevices) : mydevices); JSON.stringify(mydevices); "} 
             ],			
 			"evaldo":[{"test":"DYNAMIK let device = $NewDevice; device.model_name != undefined","then":"__PERSIST", "or":""}]}
         ],
@@ -131,6 +131,9 @@
         "CURSOR ENTER":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNENT"},
         "MENU":               {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNMEN ON"},
         "BACK":               {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MNRTN"},
+        "ECOMODE ON":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ECOON"},
+        "ECOMODE AUTO":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ECOAUTO"},
+        "ECOMODE OFF":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?ECOOFF"},
         "INPUT BD":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIBD"},
         "INPUT GAME":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SIGAME"},
         "INPUT CD":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?SICD"},
@@ -164,7 +167,7 @@
         "SUR:DIRECT":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSDIRECT"},
         "SUR:PURE DIRECT":    {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSPURE DIRECT"},
         "SUR:STEREO":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSSTEREO"},
-        "SUR:AUTO":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSAUTO"},
+        "SUR:AUTO":           {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MSAUTO"},    
         "__VOLUMESET":        {"label":"", "type":"http-get", "command":"DYNAMIK \"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?MV\" + (\"0\" + Math.round(98*Number($MainVolumePercent)/100).toString() ).slice(-2)"},
 
         "POWER Z2 ON":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z2ON",      "evaldo":[{"test":true, "then":"__INITIALISE", "or":""}]},
