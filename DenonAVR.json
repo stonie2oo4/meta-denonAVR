@@ -1,7 +1,7 @@
 {   "name":"DenonMarantzAVR",
     "manufacturer":"DenonMarantz",
     "type":"AVRECEIVER",
-    "version":9,
+    "version":10,
     "compatible-meta":"1.0.4",
     "persistedvariables":{
         "MyDevices": "[]",
