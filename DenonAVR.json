@@ -212,7 +212,7 @@
         "__Z3MUTEON":         {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3MUON",    "evalwrite": [{"variable": "Zone3Mute", "value": "on" }] },
         "__Z3MUTEOFF":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3MUOFF",   "evalwrite": [{"variable": "Zone3Mute", "value": "off"}] },
         "INPUT Z3 BD":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3BD"},
-        "INPUT Z2 GAME":      {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3GAME"},
+        "INPUT Z3 GAME":      {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3GAME"},
         "INPUT Z3 CD":        {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3CD"},
         "INPUT Z3 DVD":       {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3DVD"},
         "INPUT Z3 SAT/CBL":   {"label":"", "type":"http-get", "command":"http://$DenonURI:$DenonPort/goform/formiPhoneAppDirect.xml?Z3SAT/CBL"},
